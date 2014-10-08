@@ -1,0 +1,32 @@
+[PROJECT]
+Target=codigo.HEX
+Development_Mode=2
+Processor=0x877A
+ToolSuite=CCS
+
+[Directories]
+Include=
+Library=
+LinkerScript=
+
+[Target Data]
+FileList=codigo.c;
+BuildTool=C-COMPILER
+OptionString=+FM
+AdditionalOptionString=
+BuildRequired=1
+
+[codigo.c]
+Type=4
+Path=
+FileList=
+BuildTool=
+OptionString=
+AdditionalOptionString=
+
+[mru-list]
+1=C:\PROYEC~1\PRACTI~3\codigo.c
+
+[Windows]
+0=0000 C:\PROYEC~1\PRACTI~3\codigo.c 0 0 796 451 3 0
+

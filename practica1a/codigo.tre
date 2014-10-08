@@ -1,0 +1,14 @@
+ÀÄcodigo
+   ÃÄMAIN  0/190  Ram=4
+   ³  ÃÄ??0??
+   ³  ÃÄ@ITOF  0/31  Ram=2
+   ³  ÃÄ@MULFF  0/117  Ram=13
+   ³  ÃÄ@DIVFF  0/204  Ram=14
+   ³  ÃÄ@MULFF  0/117  Ram=13
+   ³  ÀÄ@delay_ms1  0/23  Ram=1
+   ÃÄinterrupcionTimer0  0/23  Ram=0
+   ÀÄinterrupcionSensor  0/71  Ram=1
+      ÃÄ@const59  0/23  Ram=0
+      ÃÄ@PRINTF_LD_9600_62_63  0/118  Ram=9
+      ÃÄ@const62  0/20  Ram=0
+      ÀÄ@PRINTF_LD_9600_62_63  0/118  Ram=9

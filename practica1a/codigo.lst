@@ -1,0 +1,472 @@
+CCS PCM C Compiler, Version 4.032, 62930               07-oct.-14 08:59
+
+               Filename: codigo.lst
+
+               ROM used: 878 words (11%)
+                         Largest free fragment is 2048
+               RAM used: 35 (10%) at main() level
+                         59 (16%) worst case
+               Stack:    3 worst case (1 in main + 2 for interrupts)
+
+*
+0000:  MOVLW  00
+0001:  MOVWF  0A
+0002:  GOTO   2B0
+0003:  NOP
+0004:  MOVWF  7F
+0005:  SWAPF  03,W
+0006:  CLRF   03
+0007:  MOVWF  21
+0008:  MOVF   0A,W
+0009:  MOVWF  20
+000A:  CLRF   0A
+000B:  MOVF   04,W
+000C:  MOVWF  22
+000D:  MOVF   77,W
+000E:  MOVWF  23
+000F:  MOVF   78,W
+0010:  MOVWF  24
+0011:  MOVF   79,W
+0012:  MOVWF  25
+0013:  MOVF   7A,W
+0014:  MOVWF  26
+0015:  MOVF   7B,W
+0016:  MOVWF  27
+0017:  BCF    03.7
+0018:  BCF    03.5
+0019:  BTFSS  0B.5
+001A:  GOTO   01D
+001B:  BTFSC  0B.2
+001C:  GOTO   034
+001D:  BTFSS  0B.3
+001E:  GOTO   021
+001F:  BTFSC  0B.0
+0020:  GOTO   037
+0021:  MOVF   22,W
+0022:  MOVWF  04
+0023:  MOVF   23,W
+0024:  MOVWF  77
+0025:  MOVF   24,W
+0026:  MOVWF  78
+0027:  MOVF   25,W
+0028:  MOVWF  79
+0029:  MOVF   26,W
+002A:  MOVWF  7A
+002B:  MOVF   27,W
+002C:  MOVWF  7B
+002D:  MOVF   20,W
+002E:  MOVWF  0A
+002F:  SWAPF  21,W
+0030:  MOVWF  03
+0031:  SWAPF  7F,F
+0032:  SWAPF  7F,W
+0033:  RETFIE
+0034:  BCF    0A.3
+0035:  BCF    0A.4
+0036:  GOTO   065
+0037:  BCF    0A.3
+0038:  BCF    0A.4
+0039:  GOTO   0F2
+.................... #include <16F877a.h>   
+.................... //////// Standard Header file for the PIC16F877A device //////////////// 
+.................... #device PIC16F877A 
+.................... #list 
+....................  
+.................... #device adc=10 
+.................... #FUSES NOWDT, XT, NOPUT, NOPROTECT, NOBROWNOUT, NOLVP, NOCPD, NOWRT, NODEBUG  
+.................... #use delay(clock=4000000) 
+0299:  MOVLW  3A
+029A:  MOVWF  04
+029B:  BCF    03.7
+029C:  MOVF   00,W
+029D:  BTFSC  03.2
+029E:  GOTO   2AD
+029F:  MOVLW  01
+02A0:  MOVWF  78
+02A1:  CLRF   77
+02A2:  DECFSZ 77,F
+02A3:  GOTO   2A2
+02A4:  DECFSZ 78,F
+02A5:  GOTO   2A1
+02A6:  MOVLW  4A
+02A7:  MOVWF  77
+02A8:  DECFSZ 77,F
+02A9:  GOTO   2A8
+02AA:  GOTO   2AB
+02AB:  DECFSZ 00,F
+02AC:  GOTO   29F
+02AD:  BCF    0A.3
+02AE:  BCF    0A.4
+02AF:  GOTO   36A (RETURN)
+.................... #use fast_io(a) 
+.................... #use fast_io(b) 
+.................... #use fast_io(c) 
+.................... #use fast_io(e)   
+.................... #use rs232(baud=9600, xmit=pin_c6,rcv=pin_c7, parity=N, bits=8) 
+....................  
+.................... int estadoSensor = 0; 
+*
+02C3:  BCF    03.5
+02C4:  CLRF   28
+.................... float potenciometro; 
+.................... float voltaje; 
+.................... float valorPwm; 
+.................... int16 timer=0; 
+02C5:  CLRF   35
+02C6:  CLRF   36
+.................... int16 segundo=0; 
+02C7:  CLRF   37
+02C8:  CLRF   38
+....................  
+.................... #INT_RTCC 
+.................... void interrupcionTimer0(){ 
+.................... set_timer0(6); 
+*
+0065:  MOVLW  06
+0066:  MOVWF  01
+.................... timer++; 
+0067:  INCF   35,F
+0068:  BTFSC  03.2
+0069:  INCF   36,F
+....................  
+.................... if (timer==250){ 
+006A:  MOVF   35,W
+006B:  SUBLW  FA
+006C:  BTFSS  03.2
+006D:  GOTO   078
+006E:  MOVF   36,F
+006F:  BTFSS  03.2
+0070:  GOTO   078
+.................... output_toggle(PIN_B3); 
+0071:  MOVLW  08
+0072:  XORWF  06,F
+.................... segundo++; 
+0073:  INCF   37,F
+0074:  BTFSC  03.2
+0075:  INCF   38,F
+.................... timer=0; 
+0076:  CLRF   36
+0077:  CLRF   35
+.................... } 
+.................... } 
+....................  
+....................  
+0078:  BCF    0B.2
+0079:  BCF    0A.3
+007A:  BCF    0A.4
+007B:  GOTO   021
+.................... #INT_RB 
+.................... void interrupcionSensor(){ 
+.................... //tadoSensor=input(PIN_B1); 
+.................... if (input(PIN_B4)==1){ 
+*
+00F2:  BTFSS  06.4
+00F3:  GOTO   114
+.................... output_low(PIN_B1); 
+00F4:  BCF    06.1
+.................... printf("Desbloqueado %Ld \n", segundo); 
+00F5:  CLRF   4B
+00F6:  MOVF   4B,W
+00F7:  CALL   03A
+00F8:  INCF   4B,F
+00F9:  MOVWF  77
+00FA:  MOVF   77,W
+00FB:  BTFSS  0C.4
+00FC:  GOTO   0FB
+00FD:  MOVWF  19
+00FE:  MOVLW  0D
+00FF:  SUBWF  4B,W
+0100:  BTFSS  03.2
+0101:  GOTO   0F6
+0102:  MOVLW  10
+0103:  MOVWF  04
+0104:  MOVF   38,W
+0105:  MOVWF  4D
+0106:  MOVF   37,W
+0107:  MOVWF  4C
+0108:  CALL   07C
+0109:  MOVLW  20
+010A:  BTFSS  0C.4
+010B:  GOTO   10A
+010C:  MOVWF  19
+010D:  MOVLW  0A
+010E:  BTFSS  0C.4
+010F:  GOTO   10E
+0110:  MOVWF  19
+.................... segundo=0; 
+0111:  CLRF   38
+0112:  CLRF   37
+.................... } 
+.................... else if(input(PIN_B4)==0){ 
+0113:  GOTO   135
+0114:  BTFSC  06.4
+0115:  GOTO   135
+.................... output_high(PIN_B1); 
+0116:  BSF    06.1
+.................... printf("Bloqueado %Ld \n", segundo); 
+0117:  CLRF   4B
+0118:  MOVF   4B,W
+0119:  CALL   051
+011A:  INCF   4B,F
+011B:  MOVWF  77
+011C:  MOVF   77,W
+011D:  BTFSS  0C.4
+011E:  GOTO   11D
+011F:  MOVWF  19
+0120:  MOVLW  0A
+0121:  SUBWF  4B,W
+0122:  BTFSS  03.2
+0123:  GOTO   118
+0124:  MOVLW  10
+0125:  MOVWF  04
+0126:  MOVF   38,W
+0127:  MOVWF  4D
+0128:  MOVF   37,W
+0129:  MOVWF  4C
+012A:  CALL   07C
+012B:  MOVLW  20
+012C:  BTFSS  0C.4
+012D:  GOTO   12C
+012E:  MOVWF  19
+012F:  MOVLW  0A
+0130:  BTFSS  0C.4
+0131:  GOTO   130
+0132:  MOVWF  19
+.................... segundo=0; 
+0133:  CLRF   38
+0134:  CLRF   37
+.................... } 
+.................... } 
+0135:  BCF    0B.0
+0136:  BCF    0A.3
+0137:  BCF    0A.4
+0138:  GOTO   021
+.................... void main(){ 
+*
+02B0:  CLRF   04
+02B1:  BCF    03.7
+02B2:  MOVLW  1F
+02B3:  ANDWF  03,F
+02B4:  MOVLW  19
+02B5:  BSF    03.5
+02B6:  MOVWF  19
+02B7:  MOVLW  A6
+02B8:  MOVWF  18
+02B9:  MOVLW  90
+02BA:  BCF    03.5
+02BB:  MOVWF  18
+02BC:  BSF    03.5
+02BD:  BSF    1F.0
+02BE:  BSF    1F.1
+02BF:  BSF    1F.2
+02C0:  BCF    1F.3
+02C1:  MOVLW  07
+02C2:  MOVWF  1C
+.................... 	set_tris_b(0x10); 
+*
+02C9:  MOVLW  10
+02CA:  BSF    03.5
+02CB:  MOVWF  06
+.................... 	set_tris_a(0x01); 
+02CC:  MOVLW  01
+02CD:  MOVWF  05
+.................... 	set_tris_c(0x00); 
+02CE:  MOVLW  00
+02CF:  MOVWF  07
+.................... 	output_b(0x00); 
+02D0:  BCF    03.5
+02D1:  CLRF   06
+.................... 	output_a(0x00); 
+02D2:  CLRF   05
+.................... 	output_c(0x00); 
+02D3:  CLRF   07
+.................... 	ENABLE_INTERRUPTS(INT_RB); 
+02D4:  BSF    03.6
+02D5:  BSF    0B.3
+.................... 	ENABLE_INTERRUPTS(int_rtcc); 
+02D6:  BCF    03.6
+02D7:  BSF    0B.5
+.................... 	ENABLE_INTERRUPTS(GLOBAL); 
+02D8:  MOVLW  C0
+02D9:  IORWF  0B,F
+.................... 	SETUP_ADC_PORTS(RA0_ANALOG); 
+02DA:  BSF    03.5
+02DB:  BCF    1F.0
+02DC:  BSF    1F.1
+02DD:  BSF    1F.2
+02DE:  BSF    1F.3
+.................... 	setup_adc(ADC_CLOCK_DIV_32); 
+02DF:  BCF    1F.6
+02E0:  BCF    03.5
+02E1:  BCF    1F.6
+02E2:  BSF    1F.7
+02E3:  BSF    03.5
+02E4:  BSF    1F.7
+02E5:  BCF    03.5
+02E6:  BSF    1F.0
+.................... 	setup_ccp2(CCP_PWM); 
+02E7:  BCF    07.1
+02E8:  MOVLW  0C
+02E9:  MOVWF  1D
+.................... 	setup_timer_2(T2_DIV_BY_1,25,1);			//prescales de 1, valor timer2 =25                       	 
+02EA:  MOVLW  00
+02EB:  MOVWF  78
+02EC:  IORLW  04
+02ED:  MOVWF  12
+02EE:  MOVLW  19
+02EF:  BSF    03.5
+02F0:  MOVWF  12
+.................... 	set_pwm2_duty(0.000000526); 
+02F1:  MOVLW  5A
+02F2:  BCF    03.5
+02F3:  MOVWF  1B
+02F4:  MOVF   1D,W
+02F5:  ANDLW  CF
+02F6:  IORLW  20
+02F7:  MOVWF  1D
+.................... 	setup_timer_0(RTCC_INTERNAL | RTCC_DIV_16); 
+02F8:  BSF    03.5
+02F9:  MOVF   01,W
+02FA:  ANDLW  C0
+02FB:  IORLW  03
+02FC:  MOVWF  01
+.................... 	set_timer0(6); 
+02FD:  MOVLW  06
+02FE:  BCF    03.5
+02FF:  MOVWF  01
+.................... while (1){ 
+.................... 	set_adc_channel(0);                       
+0300:  MOVLW  00
+0301:  MOVWF  78
+0302:  MOVF   1F,W
+0303:  ANDLW  C7
+0304:  IORWF  78,W
+0305:  MOVWF  1F
+....................    delay_us(10);    
+0306:  MOVLW  03
+0307:  MOVWF  77
+0308:  DECFSZ 77,F
+0309:  GOTO   308
+.................... 	potenciometro=read_adc(); 
+030A:  BSF    1F.2
+030B:  BTFSC  1F.2
+030C:  GOTO   30B
+030D:  MOVF   1E,W
+030E:  MOVWF  7A
+030F:  BSF    03.5
+0310:  MOVF   1E,W
+0311:  BCF    03.5
+0312:  MOVWF  39
+0313:  MOVF   1E,W
+0314:  MOVWF  3A
+0315:  GOTO   139
+0316:  MOVF   7A,W
+0317:  MOVWF  2C
+0318:  MOVF   79,W
+0319:  MOVWF  2B
+031A:  MOVF   78,W
+031B:  MOVWF  2A
+031C:  MOVF   77,W
+031D:  MOVWF  29
+.................... 	voltaje=potenciometro*5.0/1023.0; 
+031E:  MOVF   2C,W
+031F:  MOVWF  3C
+0320:  MOVF   2B,W
+0321:  MOVWF  3B
+0322:  MOVF   2A,W
+0323:  MOVWF  3A
+0324:  MOVF   29,W
+0325:  MOVWF  39
+0326:  CLRF   40
+0327:  CLRF   3F
+0328:  MOVLW  20
+0329:  MOVWF  3E
+032A:  MOVLW  81
+032B:  MOVWF  3D
+032C:  CALL   158
+032D:  MOVF   77,W
+032E:  MOVWF  39
+032F:  MOVF   78,W
+0330:  MOVWF  3A
+0331:  MOVF   79,W
+0332:  MOVWF  3B
+0333:  MOVF   7A,W
+0334:  MOVWF  3C
+0335:  MOVWF  40
+0336:  MOVF   79,W
+0337:  MOVWF  3F
+0338:  MOVF   78,W
+0339:  MOVWF  3E
+033A:  MOVF   77,W
+033B:  MOVWF  3D
+033C:  CLRF   44
+033D:  MOVLW  C0
+033E:  MOVWF  43
+033F:  MOVLW  7F
+0340:  MOVWF  42
+0341:  MOVLW  88
+0342:  MOVWF  41
+0343:  GOTO   1CD
+0344:  MOVF   7A,W
+0345:  MOVWF  30
+0346:  MOVF   79,W
+0347:  MOVWF  2F
+0348:  MOVF   78,W
+0349:  MOVWF  2E
+034A:  MOVF   77,W
+034B:  MOVWF  2D
+.................... 	valorPwm=voltaje*200.0; 
+034C:  MOVF   30,W
+034D:  MOVWF  3C
+034E:  MOVF   2F,W
+034F:  MOVWF  3B
+0350:  MOVF   2E,W
+0351:  MOVWF  3A
+0352:  MOVF   2D,W
+0353:  MOVWF  39
+0354:  CLRF   40
+0355:  CLRF   3F
+0356:  MOVLW  48
+0357:  MOVWF  3E
+0358:  MOVLW  86
+0359:  MOVWF  3D
+035A:  CALL   158
+035B:  MOVF   7A,W
+035C:  MOVWF  34
+035D:  MOVF   79,W
+035E:  MOVWF  33
+035F:  MOVF   78,W
+0360:  MOVWF  32
+0361:  MOVF   77,W
+0362:  MOVWF  31
+.................... 	//set_pwm2_duty(valorPwm); 
+.................... 	output_toggle(PIN_B2); 
+0363:  MOVLW  04
+0364:  XORWF  06,F
+.................... 	delay_ms(500); 
+0365:  MOVLW  02
+0366:  MOVWF  39
+0367:  MOVLW  FA
+0368:  MOVWF  3A
+0369:  GOTO   299
+036A:  DECFSZ 39,F
+036B:  GOTO   367
+.................... 	 
+.................... 	//output_low(PIN_B2); 
+.................... 	//delay_ms(500); 
+.................... 	/* 
+.................... 	printf("Voltaje = %f \n" , voltaje); 
+.................... 	printf(" valorPwm = %f \n" , valorPwm); 
+.................... 	printf("Valor potenciometro = %f \n ", potenciometro); 
+.................... 	delay_ms(500); 
+.................... */ 
+....................  
+.................... 	 
+.................... 	} 
+036C:  GOTO   300
+.................... } 
+....................  
+036D:  SLEEP
+
+Configuration Fuses:
+   Word  1: 3F39   XT NOWDT NOPUT NODEBUG NOPROTECT NOBROWNOUT NOLVP NOCPD NOWRT
