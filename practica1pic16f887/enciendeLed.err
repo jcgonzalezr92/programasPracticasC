@@ -1,0 +1,9 @@
+*** Error 111 "enciendeLed.c" Line 3(7,68): Unknown keyword in #FUSES   "NOWRT"
+*** Error 99 "enciendeLed.c" Line 4(5,16): Option invalid   Not a valid port: A
+*** Error 128 "enciendeLed.c" Line 5(1,12): A #DEVICE required before this line
+*** "enciendeLed.c" Line 6: Error #12: Undefined identifier   set_tris_a
+*** "enciendeLed.c" Line 7: Error #12: Undefined identifier   output_b
+*** "enciendeLed.c" Line 9: Error #12: Undefined identifier   true
+*** "enciendeLed.c" Line 10: Error #12: Undefined identifier   output_high
+*** "enciendeLed.c" Line 12: Error #12: Undefined identifier   output_low
+      8 Errors,  0 Warnings.
