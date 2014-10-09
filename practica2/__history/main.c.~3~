@@ -1,0 +1,33 @@
+#include <main.h>
+
+
+void main()
+{
+   set_tris_a(0x01); 
+   set_tris_b(0x10);
+   set_tris_c(0x00);
+   output_a(0x00);
+   output_b(0x00);
+   output_c(0x00);
+   ENABLE_INTERRUPTS(INT_RB);    // Habilita interrupcion por cambio de estado.
+   ENABLE_INTERRUPTS(int_rtcc);  // Habilita interrupcion timer0.
+   ENABLE_INTERRUPTS(GLOBAL);    //Habilita las interrupciones globales.
+   SETUP_ADC_PORTS(RA0_ANALOG);  //Configura adc en en PIN A0
+   setup_adc(ADC_CLOCK_DIV_32);  
+   setup_timer_0(RTCC_INTERNAL | RTCC_DIV_16);  //
+   set_timer0(6);
+   while(TRUE)
+   {
+      set_adc_channel(0);       //      lee adc de canal 0 en RA0         
+      delay_us(10);              
+      potenciometro=read_adc();  //se agrega el valor de lectura a la variable potenciometro.
+      voltaje=potenciometro*5.0/1023.0;   //
+      valorPwm=voltaje*200.0;
+      pwm_set_duty_percent(valorPwm);
+      
+   }
+
+}
+
+
+

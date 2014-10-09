@@ -9,11 +9,11 @@ int16 segundo=0;
 short frec = false;
 #INT_RTCC                           //Interrupcion de Timer0
 void interrupcionTimer0(){
-set_timer0(131);                    //Se carga timer0 com valor de 131
+set_timer0(131);//Se carga timer0 com valor de 6
 frec = !frec;
 timer++;                
 
-if (timer==8000){                    //Si timer = 8000 cada segundo
+if (timer==8000){                    //Si timer =
 output_toggle(PIN_B3);
 segundo++;
 timer=0;
@@ -21,13 +21,11 @@ timer=0;
 }
 
 
-#INT_RB                                //Interrupcion por cambio de estado del prueto B de RB4-RB7
+#INT_RB
 void interrupcionSensor(){
 //tadoSensor=input(PIN_B1);
 if (input(PIN_B4)==1){
    output_low(PIN_B1);
-   output_high(PIN_A1);
-   output_low(PIN_A2);
    if (segundo != 0){
       printf("Bloqueado %Ld Segundos \n\r ", segundo);
       segundo=0;
@@ -35,8 +33,6 @@ if (input(PIN_B4)==1){
 }
 else if(input(PIN_B4)==0){
    output_high(PIN_B1);
-   output_low(PIN_A1);
-   output_low(PIN_A2);
    if (segundo != 0){
       printf("Desbloqueado %Ld Segundos \n\r ", segundo);
       segundo=0;
@@ -57,7 +53,7 @@ void main()
    SETUP_ADC_PORTS(RA0_ANALOG);  //Configura adc en en PIN A0
    setup_adc(ADC_CLOCK_DIV_32);  
    setup_timer_0(RTCC_INTERNAL | RTCC_DIV_1);  //
-   set_timer0(131);
+   set_timer0(6);
    while(TRUE)
    {
       set_adc_channel(0);       //      lee adc de canal 0 en RA0         
