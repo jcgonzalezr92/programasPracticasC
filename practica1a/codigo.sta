@@ -14,7 +14,7 @@ Stack size: 7
 Lines Stmts  %   Files
 ----- ----- ---  -----
    91    44 100  codigo.c
-  661     0   0  ..\..\PROGRA~2\PICC\devices\16F877a.h
+  661     0   0  ..\..\..\PROGRA~2\PICC\devices\16F877a.h
 ----- -----
   752    44 Total
 

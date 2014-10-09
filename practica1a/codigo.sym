@@ -133,11 +133,11 @@ ROM Allocation:
 0003D1  @cinit2
 
 Project Directory:
-    C:\ProyectosMPLABWindows\practica1a\
+    C:\ProyectosMPLABWindows\programasPracticasC\practica1a\
 
 Project Files:
     codigo.c                                                [08-oct.-14 14:05  CRC=BA9F0BC5]
-    ..\..\PROGRA~2\PICC\devices\16F877a.h                   [03-jul.-13 14:28  CRC=4E65664C]
+    ..\..\..\PROGRA~2\PICC\devices\16F877a.h                [03-jul.-13 14:28  CRC=4E65664C]
 
 Source signature=5769D85D
 
