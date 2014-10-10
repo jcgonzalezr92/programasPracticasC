@@ -1,0 +1,21 @@
+[PROJECT]
+Target=C:\ProyectosMPLABWindows\programasPracticasC\Examen1Robotica\main.hex
+Processor_Text=PIC16F877A
+CCSVerions=5.008
+Compiler=PCM
+[Target Data]
+FileList=main.c
+[Directories]
+Include=
+[C:\ProyectosMPLABWindows\programasPracticasC\Examen1Robotica\main]
+Type=4
+[mru-list]
+1=main.c
+[Units]
+Count=1
+1=main (main)
+[Opened Files]
+1=main.c
+2=main.h
+3=..\..\..\Program Files (x86)\PICC\Devices\16F877A.h
+4=

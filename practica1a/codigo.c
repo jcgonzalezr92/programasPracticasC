@@ -69,7 +69,7 @@ while (1){
    delay_us(10);   
 	potenciometro=read_adc();
 	voltaje=potenciometro*5.0/1023.0;
-	valorPwm=voltaje*200.0;
+	valorPwm=voltaje*20.0;
 	//set_pwm2_duty(valorPwm);
     pwm_set_duty_percent(valorPwm);
 	output_toggle(PIN_B2);

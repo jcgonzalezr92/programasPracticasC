@@ -1,5 +1,5 @@
 ÀÄmain
-   ÃÄMAIN  0/184  Ram=4
+   ÃÄMAIN  0/203  Ram=4
    ³  ÃÄ@cinit1  (Inline)  Ram=0
    ³  ÃÄ@ITOF  0/31  Ram=2
    ³  ÃÄ@MULFF  0/117  Ram=13
@@ -8,11 +8,18 @@
    ³  ÀÄ@PWM_SET_DUTY_PERCENT_HW_1  0/178  Ram=3
    ³     ÃÄ@MUL3232  (Inline)  Ram=13
    ³     ÀÄ@DIV3232  (Inline)  Ram=13
-   ÃÄinterrupcionTimer0  0/26  Ram=0
-   ÀÄinterrupcionSensor  0/85  Ram=1
-      ÃÄ@PSTRINGCN7_9600_62_63  0/86  Ram=5
-      ÃÄ@PRINTF_LD_9600_62_63  0/118  Ram=9
-      ÃÄ@PSTRINGCN7_9600_62_63  0/86  Ram=5
-      ÃÄ@PSTRINGCN7_9600_62_63  0/86  Ram=5
-      ÃÄ@PRINTF_LD_9600_62_63  0/118  Ram=9
-      ÀÄ@PSTRINGCN7_9600_62_63  0/86  Ram=5
+   ÃÄinterrupcionTimer0  0/27  Ram=0
+   ÀÄinterrupcionSensor  0/93  Ram=1
+      ÃÄ@PSTRINGCN7_619  0/84  Ram=5
+      ³  ÃÄ@PUTCHAR_1_  0/34  Ram=1
+      ³  ÀÄ@PUTCHAR_1_  0/34  Ram=1
+      ÃÄ@PRINTF_LD_619  0/128  Ram=9
+      ³  ÀÄ@PUTCHAR_1_  0/34  Ram=1
+      ÃÄ@PSTRINGCN7_619  0/84  Ram=5
+      ³  ÀÄ*
+      ÃÄ@PSTRINGCN7_619  0/84  Ram=5
+      ³  ÀÄ*
+      ÃÄ@PRINTF_LD_619  0/128  Ram=9
+      ³  ÀÄ*
+      ÀÄ@PSTRINGCN7_619  0/84  Ram=5
+         ÀÄ*

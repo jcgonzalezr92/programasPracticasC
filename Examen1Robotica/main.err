@@ -1,0 +1,4 @@
+--- Info 300 "C:\ProyectosMPLABWindows\programasPracticasC\Examen1Robotica\main.h" Line 10(1,1): More info:   PWM Resolution: 9,97 bits
+*** Error 44 "main.c" Line 18(1,1): Internal Error - Contact CCS  LABEL SCR=693
+      1 Errors,  0 Warnings.
+Build Failed.

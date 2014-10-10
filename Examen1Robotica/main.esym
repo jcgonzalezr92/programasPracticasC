@@ -1,8 +1,7 @@
-C L "MAIN" 0 3 6 "FUNCTION"
-D G "__PCM__" 0 91 ""5.008""
-D G "__DEVICE__" 0 91 "877"
-D G "__DATE__" 0 91 ""09-oct.-14""
-D G "__TIME__" 0 91 ""22:48:28"" "Standard Header file for the PIC16F877A device ////////////////"
+D G "__PCM__" 0 0 ""5.008""
+D G "__DEVICE__" 0 0 ""
+D G "__DATE__" 0 0 ""09-oct.-14""
+D G "__TIME__" 0 0 ""14:44:18"" "Standard Header file for the PIC16F877A device ////////////////"
 c L "set_tris_a" 2 5 13 "FUNCTION"
 v L "value" 2 28 "int8" `54 
 f B "set_tris_a" 2 28 "void(int8 value)" `53 
@@ -775,26 +774,10 @@ d G "INT_BUSCOL" 2 655 "0x008D08"
 d G "INT_EEPROM" 2 656 "0x008D10"
 d G "INT_TIMER0" 2 657 "0x000B20"
 d G "INT_COMP" 2 658 "0x008D40"
-C L "jump_to_irs" 0 3 1 "FUNCTION"
-V G "potenciometro" 0 4 "float" `626 
-V G "voltaje" 0 5 "float" `627 
-V G "valorPwm" 0 6 "float" `628 
-V G "timer" 0 7 "int16" `629 
-V G "segundo" 0 8 "int16" `630 
-C L "jump_to_irs" 0 3 1 "FUNCTION"
-F G "interrupcionTimer0" 0 11 "void()" `631 
-C L "interrupcionTimer0" 0 3 2 "FUNCTION"
-C L "interrupcionTimer0" 0 3 1 "FUNCTION"
-F G "interrupcionSensor" 0 25 "void()" `632 
-C L "interrupcionSensor" 0 3 2 "FUNCTION"
-C L "interrupcionSensor" 0 3 2 "FUNCTION"
-F G "MAIN" 0 46 "void()" `639 
-C L "MAIN" 0 3 1 "FUNCTION"
-C L "MAIN" 0 3 1 "FUNCTION"
-C L "MAIN" 0 3 1 "FUNCTION"
-C L "MAIN" 0 3 1 "FUNCTION"
-C L "MAIN" 0 3 1 "FUNCTION"
-C L "MAIN" 0 3 1 "FUNCTION"
+V G "interrupcion" 0 6 "int8" `625 
+F G "interrupcionBoton" 0 8 "void()" `626 
+F G "MAIN" 0 19 "void()" `627 
+C L "MAIN" 0 21 1 "FUNCTION"
 F B "reset_cpu" 0 0
 F B "abs" 1 0
 F B "sleep" 0 0

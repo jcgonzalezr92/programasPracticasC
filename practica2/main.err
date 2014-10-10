@@ -1,5 +1,4 @@
---- Info 300 "C:\ProyectosMPLABWindows\programasPracticasC\practica2\main.h" Line 14(1,1): More info:   PWM period: 26,00 us, Frequency: 38,461 kHz, Resolution: 6,70 bits
->>> Warning 202 "main.c" Line 3(5,17): Variable never used:   estadoSensor
+--- Info 300 "C:\ProyectosMPLABWindows\programasPracticasC\practica2\main.h" Line 10(1,1): More info:   PWM period: 26,00 us, Frequency: 38,461 kHz, Resolution: 6,70 bits
       Memory usage:   ROM=14%      RAM=9% - 15%
-      0 Errors,  1 Warnings.
+      0 Errors,  0 Warnings.
 Build Successful.

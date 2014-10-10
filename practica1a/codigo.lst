@@ -1,4 +1,4 @@
-CCS PCM C Compiler, Version 5.008, 62930               08-oct.-14 21:46
+CCS PCM C Compiler, Version 5.008, 62930               09-oct.-14 14:53
 
                Filename:   C:\ProyectosMPLABWindows\programasPracticasC\practica1a\codigo.lst
 
@@ -1183,7 +1183,7 @@ CCS PCM C Compiler, Version 5.008, 62930               08-oct.-14 21:46
 0441:  MOVWF  2D
 0442:  MOVF   77,W
 0443:  MOVWF  2C
-.................... 	valorPwm=voltaje*200.0; 
+.................... 	valorPwm=voltaje*20.0; 
 0444:  MOVF   2F,W
 0445:  MOVWF  3B
 0446:  MOVF   2E,W
@@ -1194,9 +1194,9 @@ CCS PCM C Compiler, Version 5.008, 62930               08-oct.-14 21:46
 044B:  MOVWF  38
 044C:  CLRF   3F
 044D:  CLRF   3E
-044E:  MOVLW  48
+044E:  MOVLW  20
 044F:  MOVWF  3D
-0450:  MOVLW  86
+0450:  MOVLW  83
 0451:  MOVWF  3C
 0452:  CALL   1A6
 0453:  MOVF   7A,W
